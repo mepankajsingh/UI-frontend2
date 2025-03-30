@@ -1,6 +1,7 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { netlifyAdapter } from "@remix-run/dev/adapters";
 
 export default defineConfig({
   plugins: [
@@ -10,6 +11,8 @@ export default defineConfig({
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
       },
+      serverModuleFormat: "esm",
+      adapter: netlifyAdapter(),
     }),
     tsconfigPaths(),
   ],

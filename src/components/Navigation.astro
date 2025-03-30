@@ -1,0 +1,86 @@
+---
+---
+
+<nav id="top-nav" class="bg-gray-900 text-white shadow-md z-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Logo and brand -->
+      <div class="flex items-center">
+        <a href="/" class="text-lg font-bold text-white flex items-center">
+          <span class="text-indigo-400"><</span><span class="text-indigo-400">/></span>
+          <span class="ml-2">UIriver</span>
+        </a>
+      </div>
+      
+      <!-- Desktop navigation links -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="/frameworks" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">
+          Frameworks
+        </a>
+        <a href="/libraries" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">
+          Libraries
+        </a>
+        <a href="/about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">
+          About
+        </a>
+        <a href="/search" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          Search
+        </a>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile menu, hidden by default -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href="/frameworks" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
+        Frameworks
+      </a>
+      <a href="/libraries" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
+        Libraries
+      </a>
+      <a href="/about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
+        About
+      </a>
+      <a href="/search" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
+        Search
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Function to handle mobile menu
+  function initMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    
+    // Mobile menu toggle
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  }
+
+  // Initialize mobile menu on page load
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  
+  // Re-initialize mobile menu after page transitions
+  document.addEventListener('astro:page-load', initMobileMenu);
+  
+  // Also initialize immediately when script runs to handle view transitions
+  initMobileMenu();
+</script>

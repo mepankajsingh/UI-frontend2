@@ -1,0 +1,40 @@
+---
+interface Props {
+  framework: {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    website_url: string;
+    github_url: string;
+    npm_url: string;
+    icon_url: string;
+    logo_url: string;
+  };
+  libraryCount?: number;
+}
+
+const { framework, libraryCount } = Astro.props;
+const imageUrl = framework.icon_url || framework.logo_url || '/favicon.svg';
+---
+
+<a href={`/frameworks/${framework.slug}`} class="block group">
+  <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center hover:shadow-md transition-shadow duration-200">
+    <div class="w-12 h-12 flex items-center justify-center mb-3">
+      <img 
+        src={imageUrl} 
+        alt={`${framework.name} logo`} 
+        class="max-w-full max-h-full object-contain"
+        onerror="this.onerror=null; this.src='/favicon.svg';"
+      />
+    </div>
+    <h3 class="text-sm font-medium text-gray-900 text-center group-hover:text-indigo-600">
+      {framework.name}
+    </h3>
+    {libraryCount !== undefined && (
+      <div class="mt-1 text-xs text-gray-500">
+        {libraryCount} {libraryCount === 1 ? 'library' : 'libraries'}
+      </div>
+    )}
+  </div>
+</a>

@@ -1,18 +1,53 @@
+[[edge_functions]]
+  path = "/*"
+  function = "middleware"
+
 [build]
-  command = "remix vite:build"
-  publish = "build/client"
-  functions = "functions"
+  command = "npm run build"
+  publish = "dist"
 
-[dev]
-  command = "remix vite:dev"
-  port = 3000
+[functions]
+  node_bundler = "esbuild"
 
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
+# Enable on-demand builders for dynamic content
+[build.environment]
+  NETLIFY_EXPERIMENTAL_BUILD_FEATURES = "on-demand-builders"
+
+# Cache control for static assets
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    "Cache-Control" = "public, max-age=31536000, immutable"
+
+# Cache control for images
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    "Cache-Control" = "public, max-age=604800"
 
 [[headers]]
-  for = "/build/*"
+  for = "/*.png"
   [headers.values]
-    "Cache-Control" = "public, max-age=31536000, s-maxage=31536000"
+    "Cache-Control" = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    "Cache-Control" = "public, max-age=604800"
+
+# Cache control for fonts
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    "Cache-Control" = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    "Cache-Control" = "public, max-age=31536000, immutable"
+
+# On-demand revalidation endpoint
+[[redirects]]
+  from = "/api/revalidate"
+  to = "/.netlify/functions/revalidate"
+  status = 200

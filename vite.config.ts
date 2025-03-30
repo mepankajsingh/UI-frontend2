@@ -1,7 +1,6 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { netlifyAdapter } from "@remix-run/dev/adapters";
 
 export default defineConfig({
   plugins: [
@@ -12,8 +11,17 @@ export default defineConfig({
         v3_throwAbortReason: true,
       },
       serverModuleFormat: "esm",
-      adapter: netlifyAdapter(),
+      // Use the built-in Netlify adapter configuration instead of importing it
+      serverBuildPath: "functions/server.js",
     }),
     tsconfigPaths(),
   ],
+  // Prevent bundling of problematic modules
+  optimizeDeps: {
+    exclude: ['@remix-run/dev/adapters']
+  },
+  // Mark certain imports as external to prevent bundling issues
+  ssr: {
+    external: ['@remix-run/dev/adapters']
+  }
 });

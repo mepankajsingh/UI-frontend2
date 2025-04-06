@@ -2,18 +2,9 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "routes": [
-    {
-      "src": "/api/revalidate",
-      "dest": "/api/revalidate"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/entry"
-    }
+  "rewrites": [
+    { "source": "/api/revalidate", "destination": "/api/revalidate" },
+    { "source": "/(.*)", "destination": "/api/entry" }
   ],
   "headers": [
     {

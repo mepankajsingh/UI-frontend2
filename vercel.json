@@ -17,7 +17,7 @@
       ]
     },
     {
-      "source": "/*.woff2",
+      "source": "/(.*)\\.woff2$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "source": "/*.jpg",
+      "source": "/(.*)\\.jpg$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "source": "/*.png",
+      "source": "/(.*)\\.png$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "source": "/*.svg",
+      "source": "/(.*)\\.svg$",
       "headers": [
         {
           "key": "Cache-Control",
